@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+<title>卓越时代.秋水之家</title>
+<link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<script src="/js/jquery.min.js"></script>
+<link href="/css/style.css" rel='stylesheet' type='text/css' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+</head>
+<body>
+<div th:include="menu :: header"></div>
+  <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="padding:10px">
+  <i class="layui-icon" style="font-size: 30px; color: #1E9FFF;">&#xe631;</i><span style="font-size: 20px; color: "><b>签名加密</b></span>
+  <ul class="layui-tab-title" style="background-color: #F0F8FF;border-radius:5px;">
+    <li class="layui-this" id="md5">MD5</li>
+    <li id="aes">AES</li>
+    <li id="base64">BASE64</li>
+  </ul>
+  <div class="layui-tab-content">
+    <div class="layui-tab-item layui-show">
+      <div th:include="tool/digits-content :: md5"></div>
+    </div>
+    <div class="layui-tab-item">
+	  <div th:include="tool/digits-content :: aes"></div>
+	</div>
+	<div class="layui-tab-item">
+	  <div th:include="tool/digits-content :: base64"></div>
+	</div>
+  </div>
+  </div>
+  
+<script type="text/javascript" th:inline="javascript">
+    var a = [[${item}]]
+    $("#"+a).click()
+</script>
+<div class="main"></div>
+<div th:include="menu :: footer"></div>
+</body>
+</html>

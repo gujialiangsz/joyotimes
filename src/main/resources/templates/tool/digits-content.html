@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<header>
+</header>
+<!-- md5 -->
+<div th:fragment="md5">
+<script src="/js/md5.js"></script>
+<div class="container">
+  <br/>
+  <br/>
+  <br/>
+  <div class="row">
+    <div class="col-lg-2" style="margin-left:20%">
+    <select class="form-control" id="md5num">
+      <option>32位</option>
+    </select>
+    </div>
+  	<div class="col-lg-2" >
+    <select class="form-control" id="md5type">
+      <option>HEX</option>
+      <option>BASE64</option>
+    </select>
+    </div>
+    <div class="col-lg-2">
+      <input type="text" class="form-control" placeholder="请输入HMAC" id="md5hmac">
+    </div>
+    <div class="col-lg-1">
+      <div class="checkbox">
+	    <label>
+	      <input type="checkbox" id="md5upper">大写
+	    </label>
+	  </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="form-inline" align="center">
+    <textarea rows="30" cols="60" class="form-inline" id="md5v"></textarea>
+    <button style="margin: 30px" class="form-inline" id="md5bt">转换</button>
+    <textarea rows="30" cols="60" class="form-inline" id="md5v1" readonly="readonly"></textarea>
+    </div>
+  </div>
+</div>
+<script>
+$("#md5bt").click(function(){
+	var md5v=$("#md5v").val();
+	var v1;
+	if(md5v){
+		var md5num=$("#md5num").val();
+		var md5type=$("#md5type").val();
+		var md5hmac=$("#md5hmac").val();
+		var md5upper=$("#md5upper").attr('checked');
+		if(md5hmac&&md5hmac.trim().length>0){
+			if(md5type=="HEX"){
+				v1=hex_hmac_md5(md5hmac,md5v)
+				
+			}else{
+				v1=b64_hmac_md5(md5hmac,md5v)
+			}
+		}else{
+			if(md5type=="HEX"){
+				v1=hex_md5(md5v)
+			}else{
+				v1=b64_md5(md5v)
+			}
+			
+		}
+		if(md5upper&&v1){
+			v1=v1.toUpperCase()
+		}
+		$("#md5v1").val(v1)
+	}else{
+		layer.tips('签名字符不能为空','#md5v',{tips:[2,'FF7F50'],time:1000})
+	}
+});
+</script>
+</div>
+<!-- aes -->
+<div th:fragment="aes">
+<script src="/js/aes.js"></script>
+<div class="container">
+  <br/>
+  <br/>
+  <br/>
+  <div class="row">
+  	<div class="col-lg-2"  style="margin-left:25%">
+    <select class="form-control" id="aesop">
+      <option>加密</option>
+      <option>解密</option>
+    </select>
+    </div>
+    <div class="col-lg-2" >
+      <input type="text" class="form-control" placeholder="请输入密钥" id="aessalt">
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="form-inline" align="center">
+    <textarea rows="30" cols="60" class="form-inline" id="aesv"></textarea>
+    <button style="margin: 30px" class="form-inline" id="aesbt">转换</button>
+    <textarea rows="30" cols="60" class="form-inline" readonly="readonly" id="aesv1"></textarea>
+    </div>
+  </div>
+</div>
+<script>
+$("#aesbt").click(function(){
+	var aesv=$("#aesv").val();
+	var v1;
+	if(aesv){
+		var aesop=$("#aesop").val();
+		var aessalt=$("#aessalt").val();
+		var aesupper=$("#aesupper").attr('checked');
+		if(aessalt&&aessalt.trim().length>0){
+			if(aesop=="加密"){
+				v1=CryptoJS.AES.encrypt(aesv,aessalt).toString();
+			}else{
+				try{
+					v1=CryptoJS.AES.decrypt(aesv,aessalt).toString(CryptoJS.enc.Utf8);
+					if(v1==""){
+						layer.tips('该值'+aesop+'失败','#aesv',{tips:[2,'FF7F50'],time:1000})
+					}
+				}catch(err){
+					layer.tips('该值'+aesop+'失败','#aesv',{tips:[2,'FF7F50'],time:1000})
+				}
+			}
+		}else{
+			layer.tips('密钥不能为空','#aessalt',{tips:[2,'FF7F50'],time:1000})
+			
+		}
+		if(aesupper&&v1){
+			v1=v1.toUpperCase()
+		}
+		$("#aesv1").val(v1)
+	}else{
+		layer.tips('加密字符不能为空','#aesv',{tips:[2,'FF7F50'],time:1000})
+	}
+});
+</script>
+</div>
+
+<!-- base64 -->
+<div th:fragment="base64">
+<script src="/js/base64.js"></script>
+<div class="container">
+  <br/>
+  <br/>
+  <br/>
+  <div class="row">
+  	<div class="col-lg-2"  style="margin-left:30%">
+    <select class="form-control" id="baseop">
+      <option>加密</option>
+      <option>解密</option>
+    </select>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="form-inline" align="center">
+    <textarea rows="30" cols="60" class="form-inline" id="basev"></textarea>
+    <button style="margin: 30px" class="form-inline" id="basebt">转换</button>
+    <textarea rows="30" cols="60" class="form-inline" id="basev1" readonly="readonly"></textarea>
+    </div>
+  </div>
+</div>
+<script>
+var base = new Base64();  
+$("#basebt").click(function(){
+	var basev=$("#basev").val();
+	if(basev){
+		var baseop=$("#baseop").val();
+		if(baseop=="加密"){
+			$("#basev1").val(base.encode(basev))
+		}else{
+			$("#basev1").val(base.decode(basev))
+		}
+	}else{
+		layer.tips('待转换字符不能为空','#basev',{tips:[2,'FF7F50'],time:1000})
+	}
+});
+</script>
+</div>
+</html>

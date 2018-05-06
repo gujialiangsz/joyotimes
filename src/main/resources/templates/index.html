@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+<title>卓越时代.秋水之家</title>
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<script src="js/jquery.min.js"></script>
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<style type="text/css">
+	#too_menu a{
+		display: inline-block;
+		color:#0E8ED8;
+		padding-left:20px
+	}
+</style>
+</head>
+<body>
+<div th:include="menu :: header"></div>
+<div style="border-radius:5px;height: 160px" align="center">
+	<div class="layui-carousel" id="test2">
+	  <div carousel-item="" style="background-color: #96CDCD;">
+	    <div style=";" ><img src="images/zk.jpg" height="140px" style="vertical-align: middle;padding-top: 10px;" />
+	    <span style="display: inline-block;vertical-align: middle;margin-left:20px" class="text-left">
+	    <p>国内罕见系统讲解ZooKeeper这一应用广泛、成熟的分布式协调框架之技术书。</p>
+	    <p>原理深入，阐述清晰，覆盖ACID、CAP、BASE，二阶段/三阶段提交，Paxos、ZAB协议等热门话题。</p>
+	    <p>彻底剖析分布式一致性问题，并给出相应系统思路，以及完整解决方案及实战参考。</p>
+	    <p>无论开发人员，还是运维人士，都可通过书中ZooKeeper使用方法、内部实现及运维技巧来全面提升。</p>
+	    </span></div>
+	    <div style=";" ><img src="images/jq.jpg" height="140px" style="vertical-align: middle;padding-top: 10px;"/>
+	    <span style="display: inline-block;vertical-align: middle;margin-left:20px" class="text-left">
+	    <p>机器学习是计算机科学与人工智能的重要分支领域。</p>
+	    <p>本书作为该领域的入门教材，在内容上尽可能涵盖机器学习基础知识的各方面。</p>
+	    <p>包含经典而常用的机器学习方法（决策树、神经网络、支持向量机、贝叶斯分类器、集成学习、聚类、降维与度量学习）。</p>
+	    <p>内容涉及特征选择与稀疏学习、计算学习理论、半监督学习、概率图模型、规则学习以及强化学习。</p>
+	    </span></div>
+	  </div>
+	</div>
+	<script type="text/javascript">
+	layui.use(['carousel', 'form'], function(){
+		  var carousel = layui.carousel,form = layui.form;
+		  
+		  //改变下时间间隔、动画类型、高度
+		  carousel.render({
+		    elem: '#test2'
+		    ,interval: 5000
+		    ,anim: 'fade'
+		    ,height: '150px'
+		    ,width: '60%'
+		  });
+		  
+		  
+		  //事件
+		  carousel.on('change(test4)', function(res){
+		    console.log(res)
+		  });
+		  
+		  var $ = layui.$, active = {
+		    set: function(othis){
+		      var THIS = 'layui-bg-normal'
+		      ,key = othis.data('key')
+		      ,options = {};
+		      
+		      othis.css('background-color', '#5FB878').siblings().removeAttr('style'); 
+		      options[key] = othis.data('value');
+		      ins3.reload(options);
+		    }
+		  };
+		  
+		  //监听开关
+		  form.on('switch(autoplay)', function(){
+		    ins3.reload({
+		      autoplay: this.checked
+		    });
+		  });
+		  
+		  $('.demoSet').on('keyup', function(){
+		    var value = this.value
+		    ,options = {};
+		    if(!/^\d+$/.test(value)) return;
+		    
+		    options[this.name] = value;
+		    ins3.reload(options);
+		  });
+		  
+		});
+	</script>
+</div>
+<div class="container" id="too_menu">
+  <br/>
+  <br/>
+  <br/>
+  <div class="row">
+    <div class="col-md-4 service_box"><i class="fa fa-cog fa-3x pull-left"></i>
+      <h2>签名加密</h2>
+      	<p></p>
+      	<p><a href="tool/digits/md5">MD5</a></p>
+      	<p><a href="tool/digits/aes">AES</a></p>
+      	<p><a href="tool/digits/base64">BASE64</a></p>
+      <a href="tool/digits/md5" class="about_btn">更多</a></div>
+    <div class="col-md-4 service_box"><i class="fa fa-shield fa-3x pull-left"></i>
+      <h2>网络数据</h2>
+      <p></p>
+      <a href="#" class="about_btn">更多</a></div>
+    <div class="col-md-4 service_box"><i class="fa fa-cloud-download fa-3x pull-left"></i>
+      <h2>源码下载</h2>
+      <p></p>
+      <a href="#" class="about_btn">更多</a></div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 service_box"><i class="fa fa-flask fa-3x pull-left"></i>
+      <h2>实体转换</h2>
+      <p></p>
+      <a href="#" class="about_btn">更多</a></div>
+    <div class="col-md-4 service_box"><i class="fa fa-bar-chart fa-3x pull-left"></i>
+      <h2>数据验证</h2>
+      <p></p>
+      <a href="#" class="about_btn">更多</a></div>
+    <div class="col-md-4 service_box"><i class="fa fa-history fa-3x pull-left"></i>
+      <h2>开发文档</h2>
+      <p></p>
+      <a href="#" class="about_btn">更多</a></div>
+  </div>
+</div>
+<div class="main"></div>
+<div th:include="menu :: footer"></div>
+</body>
+</html>

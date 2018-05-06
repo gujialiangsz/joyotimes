@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<header>
+</header>
+<div th:fragment="header">
+<link rel="stylesheet" href="/layui/css/layui.css" media="all">
+<script type="text/javascript" src="/layui/layui.all.js"></script>
+<div class="header">
+  <div class="container">
+    <div class="logo"> <a href="/index"><img src="/images/logo.png" alt="joyo" width="157" height="43"></a> </div>
+    <div class="menu"> <a class="toggleMenu" href="/index"><img src="/images/nav_icon.png" alt="" /> </a>
+      <ul class="nav" id="nav">
+        <li id="index"><a href="/index">常用工具</a></li>
+        <li id="blog"><a href="javascript:layer.tips('敬请期待','#blog',{tips:[2,'FF7F50'],time:1000})">个人博客</a></li>
+        <div class="clear"></div>
+      </ul>
+      <script type="text/javascript" src="/js/responsive-nav.js"></script> 
+    </div>
+    <div class="clearfix"> </div>
+  </div>
+</div>
+<script>
+var url=this.location.href;
+var urls=url.split("/");
+var cn=urls[urls.length-1];
+console.log(cn);
+$("#"+cn).attr("class","current");
+</script>
+</div>
+
+<div th:fragment="footer">
+<div class="footer" >
+  <div class="footer_bottom"style="height:70px;position:absolute;bottom: 0px;width:100%;left:0px;" align="center" >
+    <div class="copy">
+      <p>Copyright &copy; 2018 <a href="http://www.joyotimes.cn">卓越时代.秋水</a> 粤ICP备18040065号-1 All Rights Reserved.</p>
+    </div>
+  </div>
+</div>
+</div>
